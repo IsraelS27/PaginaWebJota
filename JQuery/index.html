@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Jota</title>
     <link rel="stylesheet" href="css/site.css">
-    <link rel="stylesheet" href="css/slick.css"> <!-- Carrusel -->
+    <link rel="stylesheet" href="css/slick.css"> <!-- CARRUSEL -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" crossorigin="anonymous">
 </head>
 <body>
@@ -12,9 +12,9 @@
         <span class="logo">Jota</span> <!-- Logotipo -->
         <!-- Navegación (menú) -->
         <div class="nav">   
-            <a href="#">Principal</a>
-            <a href="acerca.html">Sobre nosotros</a>
-            <a href="#">Servicios</a>
+            <a href="principal.html">Subir</a>
+            <a href="acerca.html">Acerca de</a>
+            <a href="formulario.html">Servicios</a>
         </div>
 
         <!-- Botón del menú deslizante desde la derecha -->
@@ -30,10 +30,10 @@
         </span>
         <h2>Menú</h2>
         <ul>
-            <li><a href="#">Principal</a></li>
-            <li><a href="acerca.html">Sobre nosotros</a></li>
-            <li><a href="formulario.html">Servicios</a></li>
-            <li><a href="sabermas.html">Saber mas</a></li>
+            <li><a href="principal.html">Subir</a></li><!--LLAMAMOS A LA PAGINA PRINCIPAL.HTML DE SUBIR ARCHIVOS PARA SUBIR CONTENIDO-->
+            <li><a href="acerca.html">Acerca de</a></li><!--LLAMAMOS A LA PAGINA ACERCA.HTML DE SABER MAS PARA MOSTRAR EL CONTENIDO-->
+            <li><a href="formulario.html">Formulario</a></li><!--LLAMAMOS A LA PAGINA FORMULARIO.HTML DE SABER MAS PARA MOSTRAR EL CONTENIDO-->
+            <li><a href="sabermas.html">Saber mas</a></li><!--LLAMAMOS A LA PAGINA SABERMAS.HTML DE SABER MAS PARA MOSTRAR EL CONTENIDO-->
         </ul>
     </div>
 
@@ -43,8 +43,7 @@
         <button onclick="redireccionar()">Saber más</button>
         <script>
             function redireccionar() {
-                // Cambia 'otro_archivo.html' por la URL del archivo al que quieres dirigirte
-                window.location.href = 'sabermas.html';
+                window.location.href = 'sabermas.html'; //CAMBIA otro_archivo.html POR LA URL DEL ARCHIVO AL QUE QUIERES DIRIGIRTE
             }
         </script>
         
@@ -86,61 +85,54 @@
     </section>
 
     <!-- Formulario de suscripción -->
-<section class="bg-fixed">
-    <h3>Formulario de suscripción</h3>
-    <form id="subscription-form" action="formulario.html" method="GET">
-        <input type="text" id="first-name" name="nombre" placeholder="Nombre">
-        <input type="text" id="last-name" name="apellido" placeholder="Apellido">
-        <input type="tel" id="phone" name="telefono" placeholder="Teléfono">
-        <input type="email" id="email" name="email" placeholder="Correo electrónico">
-        <!-- Cambiado el tipo de botón a 'submit' para permitir el envío del formulario -->
-        <button type="submit">Enviar</button>
-    </form>
+    <section class="bg-fixed">
+        <h3>Formulario de suscripción</h3>
+        <form id="subscription-form" action="formulario.html" method="GET">
+            <input type="text" id="first-name" name="nombre" placeholder="Nombre">
+            <input type="text" id="last-name" name="apellido" placeholder="Apellido">
+            <input type="tel" id="phone" name="telefono" placeholder="Teléfono">
+            <input type="email" id="email" name="email" placeholder="Correo electrónico">
+            <button type="button" onclick="validateForm()">Enviar</button><!--BOTON DE VALIDACION-->
+        </form>
+        
+    </section>
     
-</section>
-
-<script>
-    function validateForm() {
-        var firstName = document.getElementById("first-name").value;
-        var lastName = document.getElementById("last-name").value;
-        var phone = document.getElementById("phone").value;
-        var email = document.getElementById("email").value;
-
-        // Validación de campos
-        if (firstName.trim() === "" || lastName.trim() === "" || phone.trim() === "" || email.trim() === "") {
-            alert("Por favor, complete todos los campos.");
-            return;
-        }
-
-        // Validación de formato de correo electrónico
-        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            alert("Por favor, ingrese un correo electrónico válido.");
-            return;
-        }
-
-        // Si pasa todas las validaciones, puedes enviar el formulario aquí
-        alert("¡Formulario enviado correctamente!");
-        // Aquí puedes agregar el código para enviar los datos del formulario a tu servidor
-
-        // Redirigir a formulario.html después de 2 segundos
-        setTimeout(function() {
-            window.location.href = 'formulario.html?' + 'nombre=' + encodeURIComponent(firstName) + '&apellido=' + encodeURIComponent(lastName) + '&telefono=' + encodeURIComponent(phone) + '&email=' + encodeURIComponent(email);
-        }, 2000);
-    }
-</script>
-
+    <script>
+        function validateForm() {
+            var firstName = document.getElementById("first-name").value;
+            var lastName = document.getElementById("last-name").value;
+            var phone = document.getElementById("phone").value;
+            var email = document.getElementById("email").value;
     
-
+            
+            if (firstName.trim() === "" || lastName.trim() === "" || phone.trim() === "" || email.trim() === "") {
+                alert("Por favor, complete todos los campos.");
+                return; // Validación de campos
+            }
+    
+            
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert("Por favor, ingrese un correo electrónico válido.");
+                return; // Validación de formato de correo electrónico
+            }
+    
+            // Si pasa todas las validaciones, puedes enviar el formulario aquí
+            alert("¡Formulario enviado con éxito!");
+            // Aquí puedes agregar el código para enviar los datos del formulario a tu servidor
+    
+            // Redirigir a formulario.html después de 2 segundos
+            setTimeout(function() {
+                window.location.href = 'formulario.html?' + 'nombre=' + encodeURIComponent(firstName) + '&apellido=' + encodeURIComponent(lastName) + '&telefono=' + encodeURIComponent(phone) + '&email=' + encodeURIComponent(email);
+            }, 2000);
+        }
+    </script>
     <footer>
         <p>Derechos reservados &copy;</p>
         <div class="social">
-            <div><a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a></div>
             <div><a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></div>
             <div><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></div>
             <div><a href="https://api.whatsapp.com/"><i class="fab fa-whatsapp"></i></a></div>
-            <div><a href="https://twitter.com/"><i class="fab fa-twitter"></i></a></div>
-
         </div>
     </footer> 
 
@@ -151,8 +143,8 @@
     a la carpeta js/jquery-3.6.4.min.js -->
     <!-- <script src="js/jquery-3.6.4.min.js"></script> -->
     
-    <!-- La funcionalidad debe estar escrita después de la conexión -->
-    <script src="js/slick.min.js"></script> <!-- Carrusel -->
+    <!-- LA FUNCIONALIDAD DEBE ESTAR ESCRITA DESPUES DE LA CONEXION-->
+    <script src="js/slick.min.js"></script> <!-- CARRUSEL -->
     <script src="js/site.js"></script>
     
     

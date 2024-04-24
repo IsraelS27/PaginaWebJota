@@ -4,38 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subir Archivos</title>
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #40E0D0; /* Verde turquesa */
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Subir Archivos</h1>
+    <div class="container">
+        <h1 class="mt-4">Subir Archivos</h1>
 
-    <form action="#" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" id="file">
-        <button type="submit">Subir Archivo</button>
-    </form>
+        <form action="#" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="file" class="form-control-file" name="file" id="file" multiple>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="uploadFiles()">Subir Archivos</button>
+        </form>
 
-    <h2>Archivos Subidos:</h2>
-    <ul id="uploaded-files"></ul>
+        <h2 class="mt-4">Archivos Subidos:</h2>
+        <table id="uploaded-files-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Tamaño</th>
+                    <th>Tipo</th>
+                </tr>
+            </thead>
+            <tbody id="uploaded-files-body"></tbody>
+        </table>
+    </div>
 
     <script>
-        // Función para mostrar archivos subidos
-        function showUploadedFiles() {
-            const filesList = document.getElementById('uploaded-files');
-            filesList.innerHTML = '';
+        // Array para almacenar los archivos subidos
+        let uploadedFiles = [];
 
-            // Obtener la lista de archivos subidos
-            const files = document.getElementById('file').files;
+        // Función para subir archivos
+        function uploadFiles() {
+            const fileInput = document.getElementById('file');
+            const files = fileInput.files;
 
-            // Iterar sobre los archivos y agregarlos a la lista
-            for (let i = 0; i < files.length; i++) {
-                const listItem = document.createElement('li');
-                listItem.textContent = files[i].name;
-                filesList.appendChild(listItem);
+            if (files.length > 0) {
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    uploadedFiles.push(file); // Agregar el archivo al array de archivos subidos
+                    addFileToTable(file);
+                }
+
+                fileInput.value = ''; // Limpiar el campo de entrada de archivos
+
+                alert('Archivos subidos con éxito.');
+            } else {
+                alert('Por favor, seleccione al menos un archivo para subir.');
             }
         }
 
-        // Llamar a la función para mostrar archivos subidos cuando se selecciona un archivo
-        document.getElementById('file').addEventListener('change', showUploadedFiles);
+        // Función para agregar un archivo a la tabla
+        function addFileToTable(file) {
+            const filesTableBody = document.getElementById('uploaded-files-body');
+            const newRow = document.createElement('tr');
+
+            const nameCell = document.createElement('td');
+            nameCell.textContent = file.name;
+            newRow.appendChild(nameCell);
+
+            const sizeCell = document.createElement('td');
+            sizeCell.textContent = formatBytes(file.size);
+            newRow.appendChild(sizeCell);
+
+            const typeCell = document.createElement('td');
+            typeCell.textContent = file.type || 'Tipo desconocido';
+            newRow.appendChild(typeCell);
+
+            filesTableBody.appendChild(newRow);
+        }
+
+        // Función para formatear el tamaño del archivo a una cadena legible
+        function formatBytes(bytes, decimals = 2) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const dm = decimals < 0 ? 0 : decimals;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+        }
     </script>
 
 </body>

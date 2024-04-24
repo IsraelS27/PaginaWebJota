@@ -10,7 +10,7 @@
 
 /* общие для body */
 body {
-  background: antiquewhite;
+  background: #40E0D0;
   font-size: 16px;
   font-weight: 400;
   font-family: "Montserrat", sans-serif;
@@ -31,7 +31,7 @@ img {
 header {
   width: 90%;
   padding: 20px 5%;
-  background: aquamarine;
+  background: #40E0D0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -52,17 +52,17 @@ header > .nav {
 header > .nav a {
   margin: 0 15px;
   display: inline-block;
-  color: #9877b8;
+  color: #ffffff;
 }
 
 header > .nav a:hover,
 header > .menu:hover {
-  color: #600fac;
+  color: #ffffff;
 }
 
 header > .menu {
   cursor: pointer;
-  color: #9877b8;
+  color: #ffffff;
   font-size: 23px;
 }
 
@@ -73,13 +73,13 @@ header > .menu {
   position: sticky;
   top: 0;
   left: 0;
-  border-bottom: 2px solid silver;
+  border-bottom: 2px solid white;
   z-index: 5;
 }
 
 /* Если нужно при скроле изменить цвет ссылок */
 .fixed .nav a {
-  color: chocolate;
+  color: white;
 }
 
 /* ------ Блок выезжающего меню ------------ */
@@ -89,7 +89,7 @@ header > .menu {
   top: 50xp;
   right: -250px;
   height: 50vh;
-  background: rgba(240, 229, 214, 0.7); /* antiquewhite ee9777*/
+  background: rgba(255,255 , 255, 0.7); /* antiquewhite ee9777*/
   /* opacity: 0.7; */
   z-index: 10;
   text-align: center;
@@ -128,7 +128,7 @@ header > .menu {
 }
 
 #hidden-menu ul li a {
-  color: #5a09a5;
+  color: #000000;
 }
 
 #hidden-menu ul li a:hover {

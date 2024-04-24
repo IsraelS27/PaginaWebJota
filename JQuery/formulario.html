@@ -4,52 +4,135 @@
     <meta charset="UTF-8">
     <title>Formulario</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #40E0D0; /* Color de fondo */
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+        #form-data {
+            margin: 20px auto;
+            width: 80%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
         table {
             border-collapse: collapse;
             width: 100%;
         }
         th, td {
-            border: 1px solid #dddddd;
+            border: 1px solid #ddd;
+            padding: 12px;
             text-align: left;
-            padding: 8px;
         }
         th {
             background-color: #f2f2f2;
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .delete-btn {
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <h1>Datos del formulario</h1>
     <div id="form-data">
-        <table>
+        <table id="data-table">
             <tr>
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Teléfono</th>
                 <th>Email</th>
+                <th>Acción</th>
             </tr>
-            <!-- Los datos del formulario se agregarán aquí -->
         </table>
     </div>
     <script>
         window.onload = function() {
-            var params = new URLSearchParams(window.location.search);
             var formDataDiv = document.getElementById('form-data');
-            if (params.has('nombre') && params.has('apellido') && params.has('telefono') && params.has('email')) {
-                var table = formDataDiv.querySelector('table');
-                var newRow = table.insertRow(-1);
-                var nombreCell = newRow.insertCell(0);
-                var apellidoCell = newRow.insertCell(1);
-                var telefonoCell = newRow.insertCell(2);
-                var emailCell = newRow.insertCell(3);
-                nombreCell.innerHTML = params.get('nombre');
-                apellidoCell.innerHTML = params.get('apellido');
-                telefonoCell.innerHTML = params.get('telefono');
-                emailCell.innerHTML = params.get('email');
+            var table = document.getElementById('data-table');
+            var formData = localStorage.getItem('formData');
+            if (formData) {
+                var data = JSON.parse(formData);
+                data.forEach(function(item) {
+                    var newRow = table.insertRow(-1);
+                    var nombreCell = newRow.insertCell(0);
+                    var apellidoCell = newRow.insertCell(1);
+                    var telefonoCell = newRow.insertCell(2);
+                    var emailCell = newRow.insertCell(3);
+                    var actionCell = newRow.insertCell(4);
+                    nombreCell.innerHTML = item.nombre;
+                    apellidoCell.innerHTML = item.apellido;
+                    telefonoCell.innerHTML = item.telefono;
+                    emailCell.innerHTML = item.email;
+                    var deleteBtn = document.createElement('button');
+                    deleteBtn.innerHTML = 'Eliminar';
+                    deleteBtn.classList.add('delete-btn');
+                    deleteBtn.onclick = function() {
+                        deleteRow(newRow);
+                    };
+                    actionCell.appendChild(deleteBtn);
+                });
             } else {
                 formDataDiv.innerHTML = '<p>No se han recibido datos del formulario.</p>';
             }
         }
+
+        function guardarDatos(nombre, apellido, telefono, email) {
+            var formData = localStorage.getItem('formData');
+            var data = formData ? JSON.parse(formData) : [];
+            data.push({nombre: nombre, apellido: apellido, telefono: telefono, email: email});
+            localStorage.setItem('formData', JSON.stringify(data));
+        }
+
+        function deleteRow(row) {
+            var table = document.getElementById('data-table');
+            var index = row.rowIndex;
+            table.deleteRow(index);
+            updateLocalStorage();
+        }
+
+        function updateLocalStorage() {
+            var tableRows = document.querySelectorAll('#data-table tr');
+            var data = [];
+            for (var i = 1; i < tableRows.length; i++) {
+                var cells = tableRows[i].querySelectorAll('td');
+                var nombre = cells[0].innerHTML;
+                var apellido = cells[1].innerHTML;
+                var telefono = cells[2].innerHTML;
+                var email = cells[3].innerHTML;
+                data.push({nombre: nombre, apellido: apellido, telefono: telefono, email: email});
+            }
+            localStorage.setItem('formData', JSON.stringify(data));
+        }
+
+        window.addEventListener('DOMContentLoaded', function() {
+            var params = new URLSearchParams(window.location.search);
+            if (params.has('nombre') && params.has('apellido') && params.has('telefono') && params.has('email')) {
+                var nombre = params.get('nombre');
+                var apellido = params.get('apellido');
+                var telefono = params.get('telefono');
+                var email = params.get('email');
+                guardarDatos(nombre, apellido, telefono, email);
+            }
+        });
     </script>
 </body>
 </html>
