@@ -32,7 +32,7 @@
         <ul>
             <li><a href="#">Principal</a></li>
             <li><a href="acerca.html">Sobre nosotros</a></li>
-            <li><a href="subir.html">Servicios</a></li>
+            <li><a href="formulario.html">Servicios</a></li>
             <li><a href="sabermas.html">Saber mas</a></li>
         </ul>
     </div>
@@ -85,44 +85,51 @@
 
     </section>
 
-    <section class="bg-fixed">
-        <h3>Formulario de suscripción</h3>
-        <form id="subscription-form">
-            <input type="text" id="first-name" placeholder="Nombre">
-            <input type="text" id="last-name" placeholder="Apellido">
-            <input type="tel" id="phone" placeholder="Teléfono">
-            <input type="email" id="email" placeholder="Correo electrónico">
-            <button type="button" onclick="validateForm()">Enviar</button>
-        </form>
-    </section>
+    <!-- Formulario de suscripción -->
+<section class="bg-fixed">
+    <h3>Formulario de suscripción</h3>
+    <form id="subscription-form" action="formulario.html" method="GET">
+        <input type="text" id="first-name" name="nombre" placeholder="Nombre">
+        <input type="text" id="last-name" name="apellido" placeholder="Apellido">
+        <input type="tel" id="phone" name="telefono" placeholder="Teléfono">
+        <input type="email" id="email" name="email" placeholder="Correo electrónico">
+        <!-- Cambiado el tipo de botón a 'submit' para permitir el envío del formulario -->
+        <button type="submit">Enviar</button>
+    </form>
     
-    <script>
-        function validateForm() {
-            var firstName = document.getElementById("first-name").value;
-            var lastName = document.getElementById("last-name").value;
-            var phone = document.getElementById("phone").value;
-            var email = document.getElementById("email").value;
-    
-            // Validación de campos
-            if (firstName.trim() === "" || lastName.trim() === "" || phone.trim() === "" || email.trim() === "") {
-                alert("Por favor, complete todos los campos.");
-                return;
-            }
-    
-            // Validación de formato de correo electrónico
-            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert("Por favor, ingrese un correo electrónico válido.");
-                return;
-            }
-    
-            // Si pasa todas las validaciones, puedes enviar el formulario aquí
-            // Aquí puedes agregar el código para enviar los datos del formulario a tu servidor
-            // Por ejemplo, puedes usar AJAX para enviar los datos sin recargar la página
-            // Aquí va el código para enviar el formulario
-            alert("¡Formulario enviado correctamente!");
+</section>
+
+<script>
+    function validateForm() {
+        var firstName = document.getElementById("first-name").value;
+        var lastName = document.getElementById("last-name").value;
+        var phone = document.getElementById("phone").value;
+        var email = document.getElementById("email").value;
+
+        // Validación de campos
+        if (firstName.trim() === "" || lastName.trim() === "" || phone.trim() === "" || email.trim() === "") {
+            alert("Por favor, complete todos los campos.");
+            return;
         }
-    </script>
+
+        // Validación de formato de correo electrónico
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert("Por favor, ingrese un correo electrónico válido.");
+            return;
+        }
+
+        // Si pasa todas las validaciones, puedes enviar el formulario aquí
+        alert("¡Formulario enviado correctamente!");
+        // Aquí puedes agregar el código para enviar los datos del formulario a tu servidor
+
+        // Redirigir a formulario.html después de 2 segundos
+        setTimeout(function() {
+            window.location.href = 'formulario.html?' + 'nombre=' + encodeURIComponent(firstName) + '&apellido=' + encodeURIComponent(lastName) + '&telefono=' + encodeURIComponent(phone) + '&email=' + encodeURIComponent(email);
+        }, 2000);
+    }
+</script>
+
     
 
     <footer>

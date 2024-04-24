@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Datos del formulario</h1>
+    <div id="form-data">
+        <table>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+            </tr>
+            <!-- Los datos del formulario se agregarán aquí -->
+        </table>
+    </div>
+    <script>
+        window.onload = function() {
+            var params = new URLSearchParams(window.location.search);
+            var formDataDiv = document.getElementById('form-data');
+            if (params.has('nombre') && params.has('apellido') && params.has('telefono') && params.has('email')) {
+                var table = formDataDiv.querySelector('table');
+                var newRow = table.insertRow(-1);
+                var nombreCell = newRow.insertCell(0);
+                var apellidoCell = newRow.insertCell(1);
+                var telefonoCell = newRow.insertCell(2);
+                var emailCell = newRow.insertCell(3);
+                nombreCell.innerHTML = params.get('nombre');
+                apellidoCell.innerHTML = params.get('apellido');
+                telefonoCell.innerHTML = params.get('telefono');
+                emailCell.innerHTML = params.get('email');
+            } else {
+                formDataDiv.innerHTML = '<p>No se han recibido datos del formulario.</p>';
+            }
+        }
+    </script>
+</body>
+</html>
