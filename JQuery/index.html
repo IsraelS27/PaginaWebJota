@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Jota</title>
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/slick.css"> <!-- Carrusel -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        <span class="logo">Jota</span> <!-- Logotipo -->
+        <!-- Navegación (menú) -->
+        <div class="nav">   
+            <a href="#">Principal</a>
+            <a href="acerca.html">Sobre nosotros</a>
+            <a href="#">Servicios</a>
+        </div>
+
+        <!-- Botón del menú deslizante desde la derecha -->
+        <span class="menu" id="show-menu">   
+            <i class="fas fa-bars"></i>
+        </span>
+    </header>
+
+    <!-- Menú para el botón de "menú" -->
+    <div id="hidden-menu">
+        <span class="close">
+            <i class="fas fa-times"></i>
+        </span>
+        <h2>Menú</h2>
+        <ul>
+            <li><a href="#">Principal</a></li>
+            <li><a href="acerca.html">Sobre nosotros</a></li>
+            <li><a href="subir.html">Servicios</a></li>
+            <li><a href="sabermas.html">Saber mas</a></li>
+        </ul>
+    </div>
+
+    <section class="full-page">
+        <h1>Jota - página conveniente para todos</h1>
+        <h3>Rápido, fácil, conveniente, innovador</h3>
+        <button onclick="redireccionar()">Saber más</button>
+        <script>
+            function redireccionar() {
+                // Cambia 'otro_archivo.html' por la URL del archivo al que quieres dirigirte
+                window.location.href = 'sabermas.html';
+            }
+        </script>
+        
+    </section>
+
+    <section class="features">
+        <div>
+            <img src="img/fast-icon.png" alt="">
+            <h4>Rápido</h4>
+            <p>Rapido y eficaz</p>
+        </div>
+
+        <div>
+            <img src="img/cool-icon.png" alt="">
+            <h4>Genial</h4>
+            <p>Proyectos geniales</p>
+        </div>
+        
+        <div>
+            <img src="img/light-icon.png" alt="">
+            <h4>Fácil</h4>
+            <p>De facil manejo</p>
+        </div>
+
+    </section>
+
+    <!-- Carrusel -->
+    <section class="gallery">
+        <h2>Algunos proyectos</h2>
+        <div id="slider">
+            <div><a href="juegoAhorcado/Ahorcado.html"><img src="img/ahorcado.jpg" alt="Ahorcado"></a></div>            
+            <div><a href="juegoGoku/index.html"><img src="img/goku.png" alt="Goku"></a></div>
+            <div><a href="juegoMemorama/index.html"><img src="img/memoria.jpg" alt="Memory Game"></a></div>
+            <div><a href="juegoAhorcado/Ahorcado.html"><img src="img/ahorcado.jpg" alt="Ahorcado"></a></div>
+            <div><a href="juegoGoku/index.html"><img src="img/goku.png" alt="Goku"></a></div>
+            <div><a href="juegoMemorama/index.html"><img src="img/memoria.jpg" alt="Memory Game"></a></div>
+        </div>
+
+    </section>
+
+    <section class="bg-fixed">
+        <h3>Formulario de suscripción</h3>
+        <form id="subscription-form">
+            <input type="text" id="first-name" placeholder="Nombre">
+            <input type="text" id="last-name" placeholder="Apellido">
+            <input type="tel" id="phone" placeholder="Teléfono">
+            <input type="email" id="email" placeholder="Correo electrónico">
+            <button type="button" onclick="validateForm()">Enviar</button>
+        </form>
+    </section>
+    
+    <script>
+        function validateForm() {
+            var firstName = document.getElementById("first-name").value;
+            var lastName = document.getElementById("last-name").value;
+            var phone = document.getElementById("phone").value;
+            var email = document.getElementById("email").value;
+    
+            // Validación de campos
+            if (firstName.trim() === "" || lastName.trim() === "" || phone.trim() === "" || email.trim() === "") {
+                alert("Por favor, complete todos los campos.");
+                return;
+            }
+    
+            // Validación de formato de correo electrónico
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert("Por favor, ingrese un correo electrónico válido.");
+                return;
+            }
+    
+            // Si pasa todas las validaciones, puedes enviar el formulario aquí
+            // Aquí puedes agregar el código para enviar los datos del formulario a tu servidor
+            // Por ejemplo, puedes usar AJAX para enviar los datos sin recargar la página
+            // Aquí va el código para enviar el formulario
+            alert("¡Formulario enviado correctamente!");
+        }
+    </script>
+    
+
+    <footer>
+        <p>Derechos reservados &copy;</p>
+        <div class="social">
+            <div><a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a></div>
+            <div><a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></div>
+            <div><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></div>
+            <div><a href="https://api.whatsapp.com/"><i class="fab fa-whatsapp"></i></a></div>
+            <div><a href="https://twitter.com/"><i class="fab fa-twitter"></i></a></div>
+
+        </div>
+    </footer> 
+
+    <!-- Primer método desde https://developers.google.com/speed/libraries/ -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- Segundo método descargar desde el sitio web oficial: jQuery
+    a la carpeta js/jquery-3.6.4.min.js -->
+    <!-- <script src="js/jquery-3.6.4.min.js"></script> -->
+    
+    <!-- La funcionalidad debe estar escrita después de la conexión -->
+    <script src="js/slick.min.js"></script> <!-- Carrusel -->
+    <script src="js/site.js"></script>
+    
+    
+</body>
+</html>

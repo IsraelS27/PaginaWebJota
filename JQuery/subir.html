@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir Archivos</title>
+</head>
+<body>
+
+    <h1>Subir Archivos</h1>
+
+    <form action="#" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="file">
+        <button type="submit">Subir Archivo</button>
+    </form>
+
+    <h2>Archivos Subidos:</h2>
+    <ul id="uploaded-files"></ul>
+
+    <script>
+        // Función para mostrar archivos subidos
+        function showUploadedFiles() {
+            const filesList = document.getElementById('uploaded-files');
+            filesList.innerHTML = '';
+
+            // Obtener la lista de archivos subidos
+            const files = document.getElementById('file').files;
+
+            // Iterar sobre los archivos y agregarlos a la lista
+            for (let i = 0; i < files.length; i++) {
+                const listItem = document.createElement('li');
+                listItem.textContent = files[i].name;
+                filesList.appendChild(listItem);
+            }
+        }
+
+        // Llamar a la función para mostrar archivos subidos cuando se selecciona un archivo
+        document.getElementById('file').addEventListener('change', showUploadedFiles);
+    </script>
+
+</body>
+</html>
